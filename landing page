@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Landing Page</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(to bottom, #175d69 23%, #330c43 95%);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .navbar .logo a {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .navbar .links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .navbar .links a {
+            font-weight: 500;
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 0;
+            transition: 0.2s ease;
+        }
+
+        .navbar .links a:hover {
+            color: #47b2e4;
+        }
+
+        .navbar .buttons a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            padding: 15px 0;
+            transition: 0.2s ease;
+        }
+
+        .navbar .buttons a:not(:last-child) {
+            margin-right: 30px;
+        }
+
+        .navbar .buttons .signin:hover {
+            color: #47b2e4;
+        }
+
+        .navbar .buttons .signup {
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            border-radius: 0.375rem;
+            text-align: center;
+            transition: 0.2s ease;
+        }
+
+        .navbar .buttons .signup:hover {
+            background-color: #47b2e4;
+            color: #fff;
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 95vh;
+            padding: 0 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section .hero {
+            max-width: 50%;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #c9c7c7;
+        }
+
+        .hero-section .img img {
+            width: 517px;
+        }
+
+        .hero-section .buttons {
+            margin-top: 40px;
+        }
+
+        .hero-section .buttons a {
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: 0.2s ease;
+            display: inline-block;
+        }
+
+        .hero-section .buttons a:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        .buttons .join {
+            background-color: #47b2e4;
+        }
+
+        .hero-section .buttons .learn {
+            border: 1px solid #fff;
+            border-radius: 0.375rem;
+        }
+
+        .hero-section .buttons a:hover {
+            background-color: #47b2e4;
+        }
+
+        /* Hamburger menu styles */
+        #menu-toggle {
+            display: none;
+        }
+
+        #hamburger-btn {
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            order: 1;
+        }
+
+        @media screen and (max-width: 1023px) {
+            .navbar .logo a {
+                font-size: 1.5rem;
+            }
+
+            .links {
+                position: fixed;
+                left: -100%;
+                top: 75px;
+                width: 100%;
+                height: 100vh;
+                padding-top: 50px;
+                background: #175d69;
+                flex-direction: column;
+                transition: 0.3s ease;
+            }
+
+            .navbar #menu-toggle:checked ~ .links {
+                left: 0;
+            }
+
+            .navbar #hamburger-btn {
+                display: block;
+            }
+
+            .header .buttons {
+                display: none;
+            }
+
+            .hero-section .hero {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero-section img {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <h2 class="logo"><a href="#">My Landing Page</a></h2>
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" id="hamburger-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </label>
+            <ul class="links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="buttons">
+                <a href="#" class="signin">Sign In</a>
+                <a href="#" class="signup">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero">
+            <h2>Welcome to My Landing Page</h2>
+            <p>Your one-stop destination for amazing content and services.</p>
+            <div class="buttons">
+                <a href="#" class="join">Join Now</a>
+                <a href="#" class="learn">Learn More</a>
+            </div>
+        </div>
+        <div class="img">
+            <img src="data:image/jpeg;base64,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" alt="hero image" />
+        </div>
+    </section>
+</body>
+</html>
