@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>my Portfolio</title>
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    
+    <style>
+    /* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scroll Bar CSS */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #6e93f7;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4070f4;
+}
+/* navbar styling */
+nav{
+  position: fixed;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 998;
+  transition: all 0.3s ease;
+  font-family: 'Ubuntu', sans-serif;
+}
+nav.sticky{
+  background: #4070f4;
+  padding: 13px 0;
+}
+nav .navbar{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+nav .navbar .logo a{
+  font-weight: 500;
+  font-size: 35px;
+  color: #4070f4;
+}
+nav.sticky .navbar .logo a{
+  color: #fff;
+}
+nav .navbar .menu{
+  display: flex;
+  position: relative;
+}
+nav .navbar .menu li{
+  list-style: none;
+  margin: 0 8px;
+}
+.navbar .menu a{
+  font-size: 18px;
+  font-weight: 500;
+  color: #0E2431;
+  padding: 6px 0;
+  transition: all 0.4s ease;
+}
+.navbar .menu a:hover{
+  color: #4070f4;
+}
+nav.sticky .menu a{
+  color: #FFF;
+}
+nav.sticky .menu a:hover{
+  color: #0E2431;
+}
+.navbar .media-icons a{
+  color: #4070f4;
+  font-size: 18px;
+  margin: 0 6px;
+}
+nav.sticky .media-icons a{
+  color: #FFF;
+}
+
+/* Side Navigation Menu Button CSS */
+nav .menu-btn,
+.navbar .menu .cancel-btn{
+  position: absolute;
+  color: #fff;
+  right: 30px;
+  top: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+nav .menu-btn{
+  color: #4070f4;
+}
+nav.sticky .menu-btn{
+  color: #FFF;
+}
+.navbar .menu .menu-btn{
+  color: #fff;
+}
+
+/* home section styling */
+.home{
+  height: 100vh;
+  width: 100%;
+  background: url("data:image/jpeg;base64,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") no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Ubuntu', sans-serif;
+}
+.home .home-content{
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home .text-one{
+  font-size: 25px;
+  color: #0E2431;
+}
+.home .text-two{
+  color: #0E2431;
+  font-size: 75px;
+  font-weight: 600;
+  margin-left: -3px;
+}
+.home .text-three{
+  font-size: 40px;
+  margin: 5px 0;
+  color: #4070f4;
+}
+.home .text-four{
+  font-size: 23px;
+  margin: 5px 0;
+  color: #0E2431;
+}
+.home .button{
+  margin: 14px 0;
+}
+.home .button button{
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 400;
+  background: #4070f4;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+}
+.home .button button:hover{
+  border-color: #4070f4;
+  background-color: #fff;
+  color: #4070f4;
+}
+
+/* About Section Styling */
+/* Those Elements Where We Have Apply Same CSS,
+ I'm Selecting Directly 'Section Tag' and 'Class'  */
+section{
+  padding-top: 40px;
+}
+section .content{
+  width: 80%;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+}
+.about .about-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+section .title{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+section .title span{
+  color: #0E2431;
+  font-size: 30px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 8px;
+}
+section .title span::before,
+section .title span::after{
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #4070f4;
+  left: 0;
+  bottom: 0;
+}
+section .title span::after{
+  bottom: -7px;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.about .about-details .left{
+  width: 45%;
+}
+.about .left img{
+  height: 400px;
+  width: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.about-details .right{
+  width: 55%;
+}
+section  .topic{
+  color: #0E2431;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.about-details .right p{
+  text-align: justify;
+  color: #0E2431;
+}
+section .button{
+  margin: 16px 0;
+}
+section .button button{
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 25px;
+  font-weight: 400;
+  background: #4070f4;
+  color: #fff;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+section .button button:hover{
+  border-color: #4070f4;
+  background-color: #fff;
+  color: #4070f4;
+}
+
+ /* My Skills CSS */
+ .skills{
+   background: #F0F8FF;
+ }
+ .skills .content{
+   padding: 40px 0;
+ }
+ .skills .skills-details{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ .skills-details .text{
+   width: 50%;
+ }
+ .skills-details p{
+   color: #0E2431;
+   text-align: justify;
+ }
+.skills .skills-details .experience{
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+.skills-details .experience .num{
+  color: #0E2431;
+  font-size: 80px;
+}
+.skills-details .experience .exp{
+  color: #0E2431;
+  margin-left: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 6px;
+}
+.skills-details .boxes{
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.skills-details .box{
+  width: calc(100% / 2 - 20px);
+  margin: 20px 0;
+}
+.skills-details .boxes .topic{
+  font-size: 20px;
+  color: #4070f4;
+}
+.skills-details .boxes .per{
+  font-size: 60px;
+  color: #4070f4;
+}
+
+/* My Services CSS */
+.services .boxes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.services .boxes .box{
+  margin: 20px 0;
+  width: calc(100% / 3 - 20px);
+  text-align: center;
+  border-radius: 12px;
+  padding: 30px 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  cursor: default;
+  transition: all 0.4s ease;
+}
+.services .boxes .box:hover{
+  background: #4070f4;
+  color: #fff;
+}
+.services .boxes .box .icon{
+  height: 50px;
+  width: 50px;
+  background: #4070f4;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 18px;
+  color: #fff;
+  margin: 0 auto 10px auto;
+  transition: all 0.4s ease;
+}
+.boxes .box:hover .icon{
+  background-color: #fff;
+  color: #4070f4;
+}
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+  color: #0E2431;
+  transition: all 0.4s ease;
+}
+.services .boxes .box:hover .topic,
+.services .boxes .box:hover p{
+  color: #fff;
+}
+/* Contact Me CSS */
+.contact{
+  background: #F0F8FF;
+}
+.contact .content{
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.contact .text{
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+/* Footer CSS */
+footer{
+  background: #4070f4;
+  padding: 15px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+footer .text span{
+  font-size: 17px;
+  font-weight: 400;
+  color: #fff;
+}
+footer .text span a{
+  font-weight: 500;
+  color: #FFF;
+}
+footer .text span a:hover{
+  text-decoration: underline;
+}
+/* Scroll TO Top Button CSS */
+.scroll-button a{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #fff;
+  background: #4070f4;
+  padding: 7px 12px;;
+  font-size: 18px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+/* Responsive Media Query */
+@media (max-width: 1190px) {
+  section .content{
+    width: 85%;
+  }
+}
+@media (max-width: 1000px) {
+  .about .about-details{
+    justify-content: center;
+    flex-direction: column;
+  }
+  .about .about-details .left{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .about-details .right{
+    width: 90%;
+    margin: 40px 0;
+  }
+  .services .boxes .box{
+    margin: 20px 0;
+    width: calc(100% / 2 - 20px);
+  }
+}
+@media (max-width: 900px) {
+  .about .left img{
+    height: 350px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 750px) {
+  nav .navbar{
+    width: 90%;
+  }
+  nav .navbar .menu{
+    position: fixed;
+    left: -100%;
+    top: 0;
+    background: #0E2431;
+    height: 100vh;
+    max-width: 400px;
+    width: 100%;
+    padding-top: 60px;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+  }
+  .navbar.active .menu{
+    left: 0;
+  }
+  nav .navbar .menu a{
+    font-size: 23px;
+    display: block;
+    color: #fff;
+    margin: 10px 0;
+  }
+  nav.sticky .menu a:hover{
+    color: #4070f4;
+  }
+  nav .navbar .media-icons{
+    display: none;
+  }
+  nav .menu-btn,
+  .navbar .menu .cancel-btn{
+    display: block;
+  }
+  .image-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: auto;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+  .home .text-two{
+    font-size: 65px;
+  }
+  .home .text-three{
+    font-size: 35px;
+  }
+  .skills .skills-details{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .skills-details .text{
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  .skills-details .boxes{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .services .boxes .box{
+    margin: 20px 0;
+    width: 100%;
+  }
+  .contact .text{
+    width: 100%;
+}
+}
+
+@media (max-width: 500px){
+  .home .text-two{
+    font-size: 55px;
+  }
+  .home .text-three{
+    font-size: 33px;
+  }
+  .skills-details .boxes .per{
+    font-size: 50px;
+    color: #4070f4;
+  }
+  .home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.text {
+  flex: 1;
+  padding-right: 20px; /* Adjust as needed */
+  text-align: center; /* Center-align text */
+}
+}
+    </style>
+    </head>
+  <body>
+    <!-- Move to up button -->
+    <div class="scroll-button">
+      <a href="#home"><i class="fas fa-arrow-up"></i></a>
+    </div>
+    <!-- navgaition menu -->
+    <nav>
+      <div class="navbar">
+        <div class="logo"><a href="#">Portfolio.</a></div>
+        <ul class="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <div class="cancel-btn">
+            <i class="fas fa-times"></i>
+          </div>
+        </ul>
+        <div class="media-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+
+    <!-- Home Section Start -->
+    <section class="home" id="home">
+      <div class="home-content">
+        <div class="text">
+          <div class="text-one">Hello,</div>
+          <div class="text-two">I'm Jaswanth</div>
+          <div class="text-three">web Developer</div>
+          <div class="text-four">From guntur</div>
+        </div>
+      	  
+       <div class="button">
+          <button>Hire Me</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section Start -->
+    <section class="about" id="about">
+      <div class="content">
+        <div class="title"><span>About Me</span></div>
+        <div class="about-details">
+          <div class="left">
+            <img src="https://th.bing.com/th?id=OIP.ABz3TZvLSGXEqT3ncZvUdQHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="" />
+          </div>
+          <div class="right">
+            <div class="topic">Web Developing Is My Passion</div>
+            <p>
+             In my portfolio, you'll find a diverse array of web development projects showcasing my skills and expertise. From building an e-commerce website using HTML/CSS, JavaScript, PHP, and MySQL to creating a sleek portfolio site with React.js, Node.js, and Express.js, I've demonstrated proficiency in front-end design, back-end development, and database management. Additionally, I've customized WordPress-based blog platforms with PHP, MySQL, HTML, and CSS to meet specific client needs, and developed interactive data visualization dashboards using D3.js, Flask, and MongoDB, showcasing my ability to deliver dynamic and engaging web solutions </p>
+            <div class="button">
+              <button onclick="window.location.href='path_to_resume.pdf'">Download CV</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- My Skill Section Start -->
+    <!-- Section Tag and Other Div will same where we need to put same CSS -->
+    <section class="skills" id="skills">
+      <div class="content">
+        <div class="title"><span>My Skills</span></div>
+        <div class="skills-details">
+          <div class="text">
+            <div class="topic">Skills Reflects Our Knowledge</div>
+            <p>Proficient in HTML, CSS, JavaScript, and PHP, I bring a comprehensive skill set to web development projects. With HTML and CSS, I create visually appealing and responsive user interfaces, ensuring seamless experiences across various devices and screen sizes. Leveraging JavaScript, I enhance interactivity and functionality, implementing dynamic features and behaviors to elevate user engagement. Additionally, my expertise extends to PHP for server-side scripting, enabling the development of robust and dynamic web applications. Whether it's crafting elegant front-end designs or implementing complex back-end functionalities, I combine these technologies to deliver high-quality, custom solutions tailored to meet client needs. My proficiency in HTML, CSS, JavaScript, and PHP allows me to tackle diverse web development challenges with creativity, efficiency, and precision.
+            </p>
+            <div class="experience">
+              <div class="num">No</div>
+              <div class="exp">
+                 <br />
+                Experience
+              </div>
+            </div>
+          </div>
+          <div class="boxes">
+            <div class="box">
+              <div class="topic">HTML</div>
+              <div class="per">90%</div>
+            </div>
+            <div class="box">
+              <div class="topic">CSS</div>
+              <div class="per">80%</div>
+            </div>
+            <div class="box">
+              <div class="topic">JavScript</div>
+              <div class="per">70%</div>
+            </div>
+            <div class="box">
+              <div class="topic">PHP</div>
+              <div class="per">60%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Services Section Start -->
+  <section class="services" id="services">
+  <div class="content">
+    <div class="title"><span>My Services</span></div>
+    <div class="boxes">
+      <div class="box">
+        <div class="icon">
+          <i class="fas fa-desktop"></i>
+        </div>
+        <div class="topic">Web Development</div>
+        <p>My web development services encompass the creation and maintenance of websites and web applications, ensuring clients have a robust online presence.
+        </p>
+      </div>
+      <div class="box">
+        <div class="icon">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <div class="topic">Graphic Design</div>
+        <p>My graphic design services offer creative solutions to visually communicate your brand's message. From logo design to marketing materials, I specialize in crafting eye-catching designs that resonate with your audience and elevate your brand's identity.
+        </p>
+      </div>
+      <div class="box">
+        <div class="icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="topic">Digital Marketing</div>
+        <p>With my digital marketing services, I help businesses reach their target audience and drive growth online. From social media management to search engine optimization (SEO), I offer strategic solutions to enhance your online presence and engage with your customers effectively.
+        </p>
+      </div>
+      <div class="box">
+        <div class="icon">
+          <i class="fab fa-android"></i>
+        </div>
+        <div class="topic">Icon Design</div>
+        <p>My icon designing services focus on creating visually appealing and highly functional icons for your website or mobile app. Whether it's for navigation menus or UI elements, I specialize in designing icons that enhance usability and create a memorable user experience.
+        </p>
+      </div>
+      <div class="box">
+        <div class="icon">
+          <i class="fas fa-camera-retro"></i>
+        </div>
+        <div class="topic">Photography</div>
+        <p>Capturing moments and telling stories through my lens, my photography services offer professional imagery to showcase your products, events, or brand. From product photography to lifestyle shoots, I specialize in creating captivating visuals that resonate with your audience.
+        </p>
+      </div>
+      <div class="box">
+        <div class="icon">
+          <i class="fas fa-tablet-alt"></i>
+        </div>
+        <div class="topic">Apps Development</div>
+        <p>My app development services provide custom solutions to bring your ideas to life in the digital realm. From concept to deployment, I specialize in developing mobile applications that deliver seamless user experiences and drive business growth.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+  
+    <!-- Contact Me section Start -->
+    <section class="contact" id="contact">
+      <div class="content">
+        <div class="title"><span>Contact Me</span></div>
+        <div class="text">
+          <div class="topic">Have Any Project?</div>
+          <p>If u have any project about any of myskills ,come let's talk in chat box</p>
+          <div class="button">
+            <button>Let's Chat</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section Start -->
+    <footer>
+      <div class="text">
+        <span> &#169; 2024 All Rights Reserved</span>
+      </div>
+    </footer>
+
+    <script>
+ // Sticky Navigation Menu JS Code
+    let nav = document.querySelector("nav");
+    let scrollBtn = document.querySelector(".scroll-button a");
+    console.log(scrollBtn);
+    let val;
+    window.onscroll = function() {
+      if(document.documentElement.scrollTop > 20){
+        nav.classList.add("sticky");
+        scrollBtn.style.display = "block";
+      }else{
+        nav.classList.remove("sticky");
+        scrollBtn.style.display = "none";
+      }
+
+    }
+
+    // Side NavIgation Menu JS Code
+    let body = document.querySelector("body");
+    let navBar = document.querySelector(".navbar");
+    let menuBtn = document.querySelector(".menu-btn");
+    let cancelBtn = document.querySelector(".cancel-btn");
+    menuBtn.onclick = function(){
+      navBar.classList.add("active");
+      menuBtn.style.opacity = "0";
+      menuBtn.style.pointerEvents = "none";
+      body.style.overflow = "hidden";
+      scrollBtn.style.pointerEvents = "none";
+    }
+    cancelBtn.onclick = function(){
+      navBar.classList.remove("active");
+      menuBtn.style.opacity = "1";
+      menuBtn.style.pointerEvents = "auto";
+      body.style.overflow = "auto";
+      scrollBtn.style.pointerEvents = "auto";
+    }
+
+    // Side Navigation Bar Close While We Click On Navigation Links
+    let navLinks = document.querySelectorAll(".menu li a");
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener("click" , function() {
+        navBar.classList.remove("active");
+        menuBtn.style.opacity = "1";
+        menuBtn.style.pointerEvents = "auto";
+      });
+    }
+    </script>
+  </body>
+</html>
